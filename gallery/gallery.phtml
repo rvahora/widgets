@@ -1,0 +1,130 @@
+<?php 
+    if(!is_array($galleryData)){
+        echo $galleryData;
+    } else {
+?>
+<div class="gallery-widget" data-cssease="linear" data-autoplayspeed="2000" data-autoplay="false" data-slidestoscroll="1" data-slidestoshow="1" data-centermode="true" data-infinite="true">
+    <div class="gallery-loader">
+        <div class="spinner">
+            <div class="spinner-container container1">
+              <div class="circle1"></div>
+              <div class="circle2"></div>
+              <div class="circle3"></div>
+              <div class="circle4"></div>
+            </div>
+            <div class="spinner-container container2">
+              <div class="circle1"></div>
+              <div class="circle2"></div>
+              <div class="circle3"></div>
+              <div class="circle4"></div>
+            </div>
+            <div class="spinner-container container3">
+              <div class="circle1"></div>
+              <div class="circle2"></div>
+              <div class="circle3"></div>
+              <div class="circle4"></div>
+            </div>
+          </div>
+    </div>
+    
+    <div class="gallery-dropdown text-center show-for-small-only">
+        <div><?= $this->translate("CHOOSE A CATEGORY", "gallery") ?></div>
+        <div class="gl-dropdown-btn active"></div>
+        <ul class="category-list">
+            <?php foreach ($galleryData["categories"] as $value): ?>
+                <li data-target="<?=  str_replace(' ', '', strtolower($value))?>" data-type="<?=$galleryData["categoryType"][$value]?>">
+                    <img src="" />
+                    <?=  strtoupper($value)?>
+                </li>
+            <?php endforeach;?>
+        </ul> 
+    </div>
+    
+    
+    <?php foreach ($galleryData["categories"] as $cat): ?>
+    <?php $i = 0;?>
+        <div class=" gallery-wrapper hide full-width" data-gallery="<?=str_replace(' ', '', strtolower($cat))?>" data-type="<?=$galleryData["categoryType"][$cat]?>">            
+            <?php foreach ($galleryData["items"] as $value): ?>
+                <?php $i = $i + 1;?>
+                <?php if($value["category"] == $cat):?>
+                    
+                    <?php if($value["playListUrl"] == ''):?>
+            
+                        <div class="gl-img slide text-center">
+                            <img class="gallery-thumb" src="<?=$value["attachments"][0]["large"]?>" />
+                        </div>
+            
+                    <?php else:?>
+                        
+                        <?php if((int)$value["playListUrl"] == 0):?>
+            
+                            <div class="gl-img slide text-center">
+                                <iframe id="vdo<?=$i?>" src="<?=  str_replace('/watch?v=', '/embed/', $value["playListUrl"]."?enablejsapi=1")?>" frameborder="0" allowfullscreen></iframe>
+                            </div>
+
+                        <?php else:?>
+
+                            <div class="gl-img slide text-center">
+                                <iframe id="vdo<?=$i?>" src="//player.vimeo.com/video/<?=$value["playListUrl"]?>?api=1" frameborder="0" allowfullscreen></iframe>
+                            </div>
+            
+                        <?php endif;?>
+            
+                    <?php endif;?>
+            
+                <?php endif;?>
+
+            <?php endforeach;?>
+        </div>
+
+    <?php endforeach;?>
+    
+    <div class="row collapse gl">
+        <div class="medium-3 columns show-for-medium-up hide">
+            <div><?= $this->translate("CHOOSE A CATEGORY", "gallery") ?></div>
+            <ul class="category-list">
+                <?php foreach ($galleryData["categories"] as $value): ?>
+                    <li data-target="<?=  str_replace(' ', '', strtolower($value))?>" data-type="<?=$galleryData["categoryType"][$value]?>">
+                        <img src="" />
+                        <?=  strtoupper($value)?>
+                    </li>
+                <?php endforeach;?>
+                <div class="left category-list-nav show-for-medium-up">
+                    <i class="icon-chevron-up category-list-navigation previous left disabled"></i>
+                    <span class="category-list-page left"></span>
+                    <i class="icon-chevron-down category-list-navigation next left"></i>
+                </div>
+            </ul>            
+        </div>
+        <div class="small-12 medium-9 columns image-sidebar show-for-medium-up">
+            
+            <?php foreach ($galleryData["categories"] as $cat): ?>
+                <div class=" row gallery-image-list hide <?=$className?>" data-gallery-images="<?=str_replace(' ', '', strtolower($cat))?>">
+                    <div class="columns small-12 slider-nav">
+                        <div class="row medium-centered collapse">
+                        <?php foreach ($galleryData["items"] as $value): ?>
+                                <?php if($value["category"] == $cat):?>
+
+                                        <div class="gl-img slide columns medium-2 widget-item-wrapper" data-module="gallery" data-id="<?=$value["id"]?>" data-source="<?=$value["playListUrl"]?>">
+                                            <img class="gallery-thumb" src="<?=$value["attachments"][0]["large"]?>" />
+                                        </div>
+
+                                <?php endif;?>
+
+                            <?php endforeach;?>
+
+                            <div class="right image-list-nav show-for-medium-up">
+                                <i class="icon-chevron-left image-list-navigation previous left disabled"></i>
+                                <span class="image-list-page left"></span>
+                                <i class="icon-chevron-right image-list-navigation next left"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            <?php endforeach;?>
+
+        </div>
+    </div>
+</div>
+    <?php }?>

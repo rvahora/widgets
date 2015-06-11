@@ -1,0 +1,330 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Apr 20, 2015, 8:14:41 PM
+    Author     : rvahora
+*/
+
+.gallery-widget{
+    
+    font-family: 'Raleway', sans-serif;
+    margin-bottom: rem-calc(50);
+    .gallery-loader{
+        background: $galleryBackGround;
+        position: relative;
+        height: auto;
+        min-height: rem-calc(400);
+        .spinner{
+            position: absolute;
+            left: 50%;
+            top: 25%;
+        }
+    }
+    .cat-list{
+            cursor: pointer;
+            margin-left: 0;
+            li{
+                font-size: rem-calc(15);
+                display: block;
+                color: $white;
+                background: $galleryCategoryBGColor;
+                color: $galleryCategoryColor;
+                padding: rem-calc(1);
+                border-bottom: rem-calc(1) solid;
+                img{
+                    width: rem-calc(72);
+                    height: rem-calc(48);
+                    margin-right: rem-calc(5);
+                }
+                
+                &:hover{
+                    background: $galleryCategoryHover;
+                    color: $white;
+                }
+                
+                &.active {
+                    background: $galleryCategoryActive;
+                    color: $white;
+                }
+            }
+        }
+    
+    .gallery-dropdown {
+        margin-left: 10%;
+        margin-right: 10%;
+        
+        .gl-dropdown-btn{
+            margin-bottom: rem-calc(5);
+            text-align: left !important;
+            img{
+                width: rem-calc(72);
+                height: rem-calc(48);
+            }
+            &:hover{
+                cursor:pointer;
+            }
+            &.active {
+                background: $galleryCategoryActive;
+            }
+            
+            &:after{
+                display: inline-block;
+                content: "\e665";
+                font-family: 'pro-res-font';
+                font-size: 24px;
+                position: relative;
+                float: right;
+                top: rem-calc(5);
+                right: rem-calc(10);
+                -moz-osx-font-smoothing: grayscale;
+                -webkit-font-smoothing: antialiased;
+                -webkit-backface-visibility: hidden;
+                -webkit-transform: rotate(0deg);
+                -ms-transform: rotate(0deg);
+                transform: rotate(0deg);
+                -webkit-transition: -webkit-transform .2s ease;
+                transition: transform .2s ease;
+            }
+            
+            &.gl-dropdown-btn-clicked{
+                &:after{
+                    -moz-osx-font-smoothing: grayscale;
+                    -webkit-font-smoothing: antialiased;
+                    -webkit-backface-visibility: hidden;
+                    -webkit-transform: rotate(-180deg);
+                    -ms-transform: rotate(-180deg);
+                    transform: rotate(-180deg);
+                    -webkit-transition: -webkit-transform .2s ease;
+                    transition: transform .2s ease;
+                }
+            }
+        }
+        .category-list {
+            position: absolute;
+            width: 80%;
+            z-index: 10;
+            @extend .cat-list;
+            li{
+                text-align: left !important;
+            }
+        }
+        @media #{$medium-up} {
+            .category-list {
+                display: none;
+            }
+        }
+        @media #{$small-only} {
+            .category-list {
+                display: none;
+            }
+        }
+    }
+    
+    .gallery-wrapper{
+        
+        .remove-top-margin{
+            margin-top: 0 !important;
+        }
+        
+        .slick-list{
+            background: $galleryBackGround;
+            color: $galleryNavColor;
+        }
+        
+        .slick-track{
+            
+            background: $galleryBackGround;
+            margin-top: rem-calc(40);
+            
+            .slide{
+                padding: rem-calc(5);
+                
+                iframe {
+                    width: 70%;
+                    height: 70%;
+                    border-top-width: 0;
+                    border-right-width: 0;
+                    border-bottom-width: 0;
+                    border-left-width: 0;
+                }
+                @media #{$small-only} {
+                    iframe {
+                        width: 75%;
+                        height: 30%;
+                        border-top-width: 0;
+                        border-right-width: 0;
+                        border-bottom-width: 0;
+                        border-left-width: 0;
+                    }
+                }
+            }
+            
+            .slick-slide{
+                text-align: center;
+                img {
+                    display: inline-block;
+                }
+            }
+            
+            .slick-slide:not(.slick-center-active){
+                opacity: .4;
+                transition: opacity 1s ease-in-out;
+            }
+        }
+        
+        .slick-fullscreen{
+            position: absolute;
+            left: 48.75%;
+            top: rem-calc(5) !important;
+            color: $galleryNavColor;
+            cursor: pointer;
+            i{
+                font-size: rem-calc(32);
+                &:hover{
+                    cursor: pointer;
+                }
+            }
+        }
+        
+        .slick-prev{
+            position: absolute;
+            left: 46%;
+            color: $galleryNavColor;
+            top: rem-calc(5) !important;
+            i{
+                font-size: rem-calc(32);
+                &:hover{
+                    cursor: pointer;
+                }
+            }
+        }
+        .slick-next{
+            position: absolute;
+            right: 46%;
+            color: $galleryNavColor;
+            top: rem-calc(5) !important;
+            cursor: pointer;
+            i{
+                font-size: rem-calc(32);
+                &:hover{
+                    cursor: pointer;
+                }
+            }
+        }
+        @media #{$medium-only} {
+            .slick-next {
+                position: absolute;
+                right: 44%;
+            }
+            .slick-prev {
+                position: absolute;
+                left: 44%;
+            }
+            .slick-fullscreen{
+                position: absolute;
+                left: 48%;
+            }
+        }
+    }
+    
+    .active-gallery{
+        &.fullscreen{
+            position: absolute;
+            width: 100%;
+            height: auto;
+            top: 0;
+            z-index: 1000;
+            background-size: cover;
+        }
+    }
+    
+    .gl{
+        margin-top: rem-calc(10);
+        display: block !important;
+        
+        .slider-nav{
+            height: 100%;
+        }
+        
+        .category-list{
+            @extend .cat-list;
+            .category-list-nav {
+                position: relative;
+                font-size: rem-calc(15);
+                margin-top: rem-calc(10);
+                left: 35%;
+                .previous{
+                    margin: rem-calc(3) rem-calc(5);
+                    &:hover{
+                        cursor: pointer;
+                    }
+                }
+                .next{
+                    margin: rem-calc(3) rem-calc(5);
+                    &:hover{
+                        cursor: pointer;
+                    }
+                }
+                .category-list-page{
+                    margin-top: rem-calc(-5);
+                }
+            }
+        }
+        .gallery-image-list{
+            
+            height: rem-calc(275);
+            .image-list-nav {
+                position: absolute;
+                bottom: 0;
+                right:5%;
+                margin-top: rem-calc(20);
+                margin-bottom: rem-calc(10);
+                .previous{
+                    &:hover{
+                        cursor: pointer;
+                    }
+                }
+                .next{
+                    &:hover{
+                        cursor: pointer;
+                    }
+                }
+                .image-list-page{
+                    margin-top: rem-calc(-5);
+                }
+            }
+
+            .gl-img{
+                display: inline-block;
+                width: rem-calc(160);
+                height: rem-calc(110);
+                margin: rem-calc(2);
+                img{
+                    width: 100%;
+                    height: rem-calc(110);
+                    background-size: cover;
+                }
+            }
+            
+            @media #{$small-only} {
+                .gl-img {
+                    width: 100%;
+                    padding-left: 25%;
+                    padding-right: 25%;
+                }
+            }
+            
+            @media #{$medium-only} {
+                .gl-img {
+                    margin: rem-calc(5) rem-calc(10);
+                }
+                .image-list-nav {
+                    right: 5%;
+                }
+            }
+        }
+    }
+}

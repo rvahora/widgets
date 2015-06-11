@@ -1,0 +1,8 @@
+<?php
+$initText = "--:--:--";
+?>
+<div class="row digital-clock" data-timestamp="<?= $timeStamp; ?>" data-templatename="<?= $templateName; ?>" data-timezone="<?= $timezone; ?>" data-format="<?= $format; ?>" data-separator="<?= $seperator; ?>"  data-showseconds="<?= $showSeconds; ?>" data-hourzero="<?= $hourZero; ?>" data-noon="<?= $goodAfternoon; ?>" data-evening="<?= $goodEvening; ?>" data-morning-greeting="<?= $this->translate($greetMorning,'clock'); ?>" data-afternoon-greeting="<?= $this->translate($greetAfternoon,'clock');?>" data-evening-greeting="<?= $this->translate($greetEvening, 'clock');?>">
+    <div class="large-12 columns">
+          <span><?= $initText ?></span>
+    </div>
+</div>
